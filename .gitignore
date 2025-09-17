@@ -39,3 +39,6 @@ build/
 
 ### Excel Files ###
 src/test/resources/excel-files/*
+
+# Ignore config file with sensitive data
+src/test/resources/config/config.properties
