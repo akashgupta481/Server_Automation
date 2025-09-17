@@ -71,40 +71,14 @@ public class ExcelUtils {
         }
     }
 
-    public static int writeDataIntoSheet(int rowNum, List<List<WebElement>> elements) {
-        // Calculate the minimum number of rows across all columns
-        int totalRows = elements.stream()
-                .mapToInt(List::size)
-                .min()
-                .orElse(0);
-
-        // Populate data rows
-        for (int i = 0; i < totalRows; i++) {
-            Row row = sheet.createRow(rowNum++); // Create a new row in the Excel sheet
-
-            // Loop through each column (List<WebElement>)
-            for (int j = 0; j < elements.size(); j++) {
-                List<WebElement> column = elements.get(j);
-
-                // Check if the current row exists in the column
-                if (i < column.size()) {
-                    WebElement element = column.get(i);
-                    String cellValue = (j == 3) ? element.getAttribute("href") : element.getText();
-                    row.createCell(j + 1).setCellValue(cellValue); // Write data to the cell
-                } else {
-                    row.createCell(j + 1).setCellValue(""); // Add empty value for missing data
-                }
+    public static int writeDataIntoSheet(int rowNum, List<List<String>> data) {
+        for (List<String> rowData : data) {
+            Row row = sheet.createRow(rowNum++);
+            row.createCell(0).setCellValue(rowNum - 1); // S No
+            for (int i = 0; i < rowData.size(); i++) {
+                row.createCell(i + 1).setCellValue(rowData.get(i));
             }
-
-            // Add the row number to the first cell
-            row.createCell(0).setCellValue(rowNum - 1);
         }
-
-        // Auto-size columns for a better appearance
-        for (int i = 0; i <= elements.size(); i++) {
-            sheet.autoSizeColumn(i);
-        }
-
         return rowNum;
     }
 

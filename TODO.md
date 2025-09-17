@@ -1,0 +1,5 @@
+- [x] Add wait for order rows before scraping on the first page in OrdersPage.java
+- [x] Add logging in createAndSaveOrdersData to print row count, cell count, and row data
+- [x] Change orderRowsLocator from //tbody//tr to //tr to find all table rows
+- [x] Run the test to check console output for debugging
+- [ ] Verify Excel file has data after run

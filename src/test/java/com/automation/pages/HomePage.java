@@ -83,6 +83,6 @@ public class HomePage extends BasePage{
     }
 
     public boolean isOrderPlacedSuccessfully() {
-
+        return false;
     }
 }
